@@ -1,11 +1,29 @@
 const apiEndPoint="https://jsonplaceholder.typicode.com/users";
-
+const display =document.querySelector("#display-data");
 const getData =async ()=>{
  const res =await fetch(apiEndPoint);
- if(!Response.ok){
-    throw new Error (`HTTP error! status: ${response.status}`);
- }
- const data =await res.json();
- console.log(data)
+const data =await res.json();
+return data;
+
 }
-getData();
+
+const displayUsers =async()=>{
+
+    const payload= await getData();
+    let dataDisplay=payload.map((object)=>{
+        console.log(object);
+        const{name,username}=object;
+        return `
+        <div class="container">
+        <p> Name: ${name}</p>
+        <p>Username :${username}</p>
+        </div>
+        `
+
+
+    }).join("");
+
+    display.innerHTML=dataDisplay;
+
+}
+displayUsers();
