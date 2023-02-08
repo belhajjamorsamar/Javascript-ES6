@@ -5,22 +5,26 @@ const input =document.querySelector("#input");
 
 const getData = async ()=>{
  const res  =await fetch(apiEndPoint);
+ console.log(res)
  const data =await res.json();
  return data
+ 
 
 }
 
 const displayUsers =async()=>{
     let query= input.value;
     console.log("query ::", query);
+
     const payload= await getData();
 
-    let dataDisplay =payload.filter((eventData)=> {
+    let dataDisplay =payload.filter((eventData) => {
         if(query === ""){
             return eventData
         }
-        else if(eventData.name.tolowerCase().includes(query.tolowerCase())){
-            return eventData
+        else if(eventData.name){
+
+         return eventData;
         }
 
 
